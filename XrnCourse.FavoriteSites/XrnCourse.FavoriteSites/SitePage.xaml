@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             mc:Ignorable="d"
+             Appearing="ContentPage_Appearing"
+             x:Class="XrnCourse.FavoriteSites.SitePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" IconImageSource="{OnPlatform UWP=ok.png}" Clicked="BtnSave_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Name" />
+            <Entry x:Name="name" Keyboard="Text" Placeholder="Enter a name" />
+            <Label x:Name="nameError" StyleClass="errormessage" />
+            <Label Text="Url" />
+            <Entry x:Name="url" Keyboard="Url" Placeholder="Enter the URL" />
+            <Label x:Name="urlError" StyleClass="errormessage" />
+            <Label Text="Rating" />
+            <rating:SfRating x:Name="rating" ItemCount="5" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

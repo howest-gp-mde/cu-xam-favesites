@@ -4,13 +4,35 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Appearing="ContentPage_Appearing"
              x:Class="XrnCourse.FavoriteSites.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" IconImageSource="{OnPlatform UWP=add.png}" Priority="1" Order="Primary" Clicked="BtnAddSite_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="lvFavoriteSites"
+                  HasUnevenRows="False" RowHeight="60" ItemTapped="LvFavoriteSites_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="LvFavoriteSitesEdit_Clicked" CommandParameter="{Binding .}" Text="Edit" />
+                            <MenuItem Clicked="LvFavoriteSitesDelete_Clicked" CommandParameter="{Binding .}" Text="Delete"
+                                      IsDestructive="True" />
+                        </ViewCell.ContextActions>
+                            <StackLayout StyleClass="site-list-item">
+                                <StackLayout StyleClass="inner-item" HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Name}" StyleClass="text-bigger" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Url}" VerticalOptions="Start" HorizontalOptions="StartAndExpand" />
+                                </StackLayout>
+                                <Label Text="Visits: " HorizontalOptions="End" VerticalOptions="Center"></Label>
+                                <Label Text="{Binding TimesVisited}" HorizontalOptions="End" VerticalOptions="Center"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
-
+    </ContentPage.Content>
 </ContentPage>
