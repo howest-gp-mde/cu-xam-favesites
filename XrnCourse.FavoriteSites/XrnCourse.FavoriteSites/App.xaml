@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="XrnCourse.FavoriteSites.App">
     <Application.Resources>
-
+        <StyleSheet Source="/Styles/appstyles.css"></StyleSheet>
     </Application.Resources>
 </Application>

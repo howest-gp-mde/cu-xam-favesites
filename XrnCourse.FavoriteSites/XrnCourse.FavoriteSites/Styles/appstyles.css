@@ -1,0 +1,21 @@
+﻿^ContentPage {
+}
+
+.site-list-item {
+    -xf-orientation: horizontal;
+    padding: 2; /* uses css order: top, right, bottom, left (unlike XAML!) */
+}
+
+    .site-list-item .inner-item {
+        align-self: stretch;
+        padding: 5; /* uses css order: top, right, bottom, left (unlike XAML!) */
+    }
+
+.text-bigger{
+    font-size: 16;
+}
+
+.errormessage {
+    color: #f46842;
+    font-size: 13;
+}
