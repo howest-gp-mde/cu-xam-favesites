@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using Xamarin.Essentials;
@@ -17,9 +18,12 @@ namespace XrnCourse.FavoriteSites
         private ISiteRepository siteRepository;
         private ISiteService siteService;
 
+        public ObservableCollection<Site> Sites { get; } = new ObservableCollection<Site>();
+
         public MainPage()
         {
             InitializeComponent();
+            this.BindingContext = this;
 
             string filePath = Path.Combine(FileSystem.AppDataDirectory, Constants.FavoriteSitesFileName);
 
@@ -27,15 +31,24 @@ namespace XrnCourse.FavoriteSites
             siteService = new SiteService(siteRepository);
         }
 
-        private void ContentPage_Appearing(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             RefreshSites();
         }
 
+
         private async void LvFavoriteSites_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var selectedSite = e.Item as Site;
-            await siteService.Open(selectedSite.Id);
+            try
+            {
+                var selectedSite = e.Item as Site;
+                await siteService.Open(selectedSite.Id);
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Can't open site", ex.Message, "Ok");
+            }
         }
 
         private void LvFavoriteSitesDelete_Clicked(object sender, EventArgs e)
@@ -59,7 +72,9 @@ namespace XrnCourse.FavoriteSites
         private void RefreshSites()
         {
             var sites = siteService.GetAll();
-            lvFavoriteSites.ItemsSource = sites;
+            Sites.Clear();
+            foreach (var site in sites)
+                Sites.Add(site);
         }
     }
 }

@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              mc:Ignorable="d"
-             Appearing="ContentPage_Appearing"
              x:Class="XrnCourse.FavoriteSites.SitePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" IconImageSource="{OnPlatform UWP=ok.png}" Clicked="BtnSave_Clicked"></ToolbarItem>

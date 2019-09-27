@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.IO;
-using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -47,9 +47,9 @@ namespace XrnCourse.FavoriteSites
         /// </summary>
         public bool EditMode { get; private set; }
 
-
-        private void ContentPage_Appearing(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
             name.Text = Site.Name;
             url.Text = Site.Url;
             rating.Value = Site.Rating;
@@ -68,11 +68,15 @@ namespace XrnCourse.FavoriteSites
             if (!EditMode)
                 site.Id = Guid.NewGuid();
 
-            var (savedSite, errors) = siteService.Save(site);
-
-            if(errors?.Count() > 0)
+            try
             {
-                foreach (var error in errors)
+                var savedSite = siteService.Save(site);
+                Site = savedSite;
+                await Navigation.PopAsync();
+            }
+            catch(ValidationException valEx)
+            {
+                foreach (var error in valEx.Errors)
                 {
                     if (error.PropertyName == nameof(site.Name))
                     {
@@ -86,10 +90,9 @@ namespace XrnCourse.FavoriteSites
                     }
                 }
             }
-            else
+            catch(Exception ex)
             {
-                Site = savedSite;
-                await Navigation.PopAsync();
+                await DisplayAlert("Error while saving", ex.Message, "Ok");
             }
         }
 
