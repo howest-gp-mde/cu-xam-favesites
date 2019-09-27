@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,10 +31,10 @@ namespace XrnCourse.FavoriteSites.Domain.Services
 
         public Site Delete(Guid siteId)
         {
-            return _siteRepository.DeleteSite(siteId);
+            return null;
         }
 
-        public (Site, IEnumerable<ValidationFailure>) Save(Site site)
+        public Site Save(Site site)
         {
             var validationContext = new ValidationContext<Site>(site);
             var results = _siteValidator.Validate(validationContext);
@@ -46,17 +45,17 @@ namespace XrnCourse.FavoriteSites.Domain.Services
                 if (existingSite != null)
                 {
                     var savedSite = _siteRepository.UpdateSite(site);
-                    return (savedSite, null);
+                    return savedSite;
                 }
                 else
                 {
                     var savedSite = _siteRepository.AddSite(site);
-                    return (savedSite, null);
+                    return savedSite;
                 }
             }
             else
             {
-                return (null, results.Errors);
+                throw new ValidationException(results.Errors);
             }
         }
 
