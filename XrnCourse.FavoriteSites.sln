@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XrnCourse.FavoriteSites.And
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XrnCourse.FavoriteSites.iOS", "XrnCourse.FavoriteSites\XrnCourse.FavoriteSites.iOS\XrnCourse.FavoriteSites.iOS.csproj", "{5AEDF1E4-CADD-47A0-9832-590AB55D9E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XrnCourse.FavoriteSites", "XrnCourse.FavoriteSites\XrnCourse.FavoriteSites\XrnCourse.FavoriteSites.csproj", "{06F56750-E5B4-4095-BABE-17831F87F761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XrnCourse.FavoriteSites", "XrnCourse.FavoriteSites\XrnCourse.FavoriteSites\XrnCourse.FavoriteSites.csproj", "{06F56750-E5B4-4095-BABE-17831F87F761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
