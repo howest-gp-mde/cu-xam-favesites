@@ -42,7 +42,8 @@ namespace XrnCourse.FavoriteSites.Domain.Services
         {
             site.Url = PrefixUrl(site.Url);
 
-            var results = _siteValidator.Validate(site);
+            var validationContext = new ValidationContext<Site>(site);
+            var results = _siteValidator.Validate(validationContext);
             var errors = results.Errors;
             if (results.IsValid)
             {
